@@ -1,0 +1,31 @@
+#!/bin/bash
+
+
+# validation
+if [[ $1 != 'create' ]] && [[ $1 != 'delete' ]]; then
+    echo 'You must choose operation! Either create or delete...'
+    exit 1;
+fi
+
+if [[ $2 = '' ]]; then
+    echo 'You must enter vhost name!'
+    exit 1;
+fi
+
+if [[ $1 = 'create' ]]; then
+    echo "<VirtualHost *:80>
+    ServerAdmin admin@$2.dev
+    ServerName $2.dev
+    ServerAlias www.$2.dev
+    DocumentRoot /var/www/html/$2
+    ErrorLog /var/log/apache2/$2-error.log
+    CustomLog /var/log/apache2/$2-access.log combined
+</VirtualHost>" > /etc/apache2/sites-available/$2.dev.conf
+    echo -e "127.0.0.1\t$2.dev www.$2.dev" >> /etc/hosts
+    chown -R www-data:www-data /var/www/html/$2
+    chmod -R 775 /var/www/html/$2
+    a2ensite -q $2.dev.conf > /dev/null
+    service apache2 reload > /dev/null
+    service apache2 restart > /dev/null
+    echo "$2.dev vhost created."
+fi
