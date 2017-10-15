@@ -37,7 +37,8 @@ if [[ $1 = 'create' ]]; then
     exit 0
 fi
 
-if [[ $1 = 'delete' ]]
+if [[ $1 = 'delete' ]]; then
     echo 'Deleting vhost TODO...'
+
     exit 0
 fi
