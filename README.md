@@ -9,4 +9,7 @@ Owner: **www-data:www-data**
 
 Privileges: **775**
 
-It will create and enable .dev vhost. 
+It will create and enable .dev vhost.
+
+Clone script into **/usr/local/bin** for global access system wide.
+It will need root privileges.
