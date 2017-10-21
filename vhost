@@ -1,10 +1,9 @@
 #!/bin/bash
 
-
 # Validation
 # Check if ran with root privileges
 if [[ $EUID > 0 ]]; then # we can compare directly with this syntax.
-  echo "You must run script with root privilege!"
+  echo "You must run script with root privileges!"
   exit 1
 fi
 
