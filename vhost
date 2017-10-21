@@ -1,12 +1,20 @@
 #!/bin/bash
 
 
-# validation
+# Validation
+# Check if ran with root privileges
+if [[ $EUID > 0 ]]; then # we can compare directly with this syntax.
+  echo "You must run script with root privilege!"
+  exit 1
+fi
+
+# Check for supplied action
 if [[ $1 != 'create' ]] && [[ $1 != 'delete' ]]; then
     echo 'You must choose operation! Either create or delete...'
     exit 1;
 fi
 
+# Check for supplied vhost name
 if [[ $2 = '' ]]; then
     echo 'You must enter vhost name!'
     exit 1;
